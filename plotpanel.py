@@ -18,6 +18,8 @@ from numpy import *
 import wx
 import wx.lib.newevent
 
+import sys
+
 import filehandling as io
 
 # Okay due to compabiltiy issues with version above 0.91
@@ -543,7 +545,11 @@ class PlotPanel(wx.Panel):
 
 #==============================================================================
 # Print out class borrowed from wxmpl
-wx.PostScriptDC_SetResolution(300)
+try:
+	wx.PostScriptDC_SetResolution(300)
+except:
+	print "Unexpected error:", sys.exc_info()[0]
+
 
 class FigurePrinter:
     """
