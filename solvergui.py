@@ -13,6 +13,10 @@ import diffev, fom_funcs
 import filehandling as io
 import numpy as np
 
+import cProfile, pstats
+#import StringIO
+
+
 #==============================================================================
 class SolverController:
     '''
@@ -49,6 +53,9 @@ class SolverController:
         # Now load the default configuration
         self.ReadConfig()
         
+
+        self.pr = cProfile.Profile()
+        # initialize the profiler at a class level
         
     def ReadConfig(self):
         '''ReadConfig(self) --> None
@@ -316,7 +323,16 @@ class SolverController:
         '''
         evt = fitting_ended(solver = solver, desc = 'Fitting Ended')
         wx.PostEvent(self.parent, evt)
-            
+
+        pr.disable()
+        s = StringIO.StringIO()
+		sortby = 'cumulative'
+        ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+		ps.print_stats()
+		print s.getvalue()
+
+        
+
             
     
     def OnFittingEnded(self, evt):
@@ -325,6 +341,9 @@ class SolverController:
         Callback when fitting has ended. Takes care of cleaning up after
         the fit. Calculates errors on the parameters and updates the grid.
         '''
+
+
+
         solver = evt.solver
         if solver.error:
             ShowErrorDialog(self.parent, solver.error)
@@ -459,9 +478,14 @@ class SolverController:
         model = self.parent.model
         # Reset all the errorbars
         model.parameters.clear_error_pars()
+
+        self.pr.enable()
         #self.start_parameter_values = model.get_fit_values()
         self.optimizer.start_fit(model)
-        #print 'Optimizer starting'
+        print 'Optimizer starting with model: ' + model
+        # here is where we start the timer
+
+
         
     def StopFit(self):
         ''' StopFit(self) --> None
