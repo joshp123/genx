@@ -19,7 +19,8 @@ class GenX:
                 line = line + repr(value) + ","
                 # trim trailing column
 
-            line = line + repr(solver.fom)
+            line = line + repr(solver.fom) + ","
+            # lol dont forget the separators !!!
             line = line + repr(solver.gen) + ","
             time2 = time.clock()
             line = line + '%0.3f' % (time2-self.time1)
@@ -56,6 +57,13 @@ class GenX:
     def __init__(self):
         self.time1 = time.clock()
         path = 'Ni\Ni x-ray fitted.gx'
+
+        unix = False
+        if not os.path.exists(path):
+            # this is a hilariously lazy test for OS X/Linux/Unix* lixes
+            path = 'Ni/Ni x-ray fitted.gx'
+            unix = True
+
         # path to my .gx file
     
         self.diffev_solver = diffev.DiffEv()
@@ -91,8 +99,9 @@ class GenX:
         self.diffev_solver.max_generations = 100
     
         # WINDOWS IS FUCKING GARBAGE SO THIS WILL BREAK LOL
-        #self.diffev_solver.set_use_parallel_processing(True)
-        #self.diffev_solver.set_processes(4)
+        if unix:
+            self.diffev_solver.set_use_parallel_processing(True)
+            self.diffev_solver.set_processes(4)
     
     
         # start timer + fit
