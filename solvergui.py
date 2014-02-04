@@ -42,6 +42,9 @@ class SolverController:
         self.fom_error_bars_level = 1.05
         
         # Setup the output functions.
+
+        # THESE NEED TO BE OVERRRIDDEN 
+
         self.optimizer.set_text_output_func(self.TextOutput)
         self.optimizer.set_plot_output_func(self.PlotOutput)
         self.optimizer.set_parameter_output_func(self.ParameterOutput)
@@ -324,12 +327,12 @@ class SolverController:
         evt = fitting_ended(solver = solver, desc = 'Fitting Ended')
         wx.PostEvent(self.parent, evt)
 
-        pr.disable()
+        self.pr.disable()
         s = StringIO.StringIO()
-		sortby = 'cumulative'
-        ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-		ps.print_stats()
-		print s.getvalue()
+        sortby = 'cumulative'
+        ps = pstats.Stats(self.pr, stream=s).sort_stats(sortby)
+        ps.print_stats()
+        print s.getvalue()
 
         
 

@@ -68,8 +68,12 @@ class DiffEv:
         self.pop_size = 10 # Set the pop_size only
         
         # Flag to choose between the two alternatives below
-        self.use_max_generations = False 
-        self.max_generations = 500 # Use a fixed # of iterations
+        self.use_max_generations = True 
+        # modified from False
+
+        self.max_generations = 100 # Use a fixed # of iterations
+        # modified from 500
+
         self.max_generation_mult = 6 # A mult const for max number of iter
         
         # Flag to choose whether or not to use a starting guess
@@ -412,6 +416,20 @@ class DiffEv:
         gen = self.fom_log[-1,0] 
         for gen in range(int(self.fom_log[-1,0]) + 1, self.max_gen\
                                 + int(self.fom_log[-1,0]) + 1):
+            
+            # COMPARE LAST 20 FOMS AND IF NO CHANGE THEN BREAK AND COUNT AS CONVERGED
+            # MY MODIFICATION
+
+            if gen > 20:
+                log_change_in_fom = math.log(self.fom_log[-20,1]) - math.log(self.fom_log[-1,1])
+                print log_change_in_fom
+                # TODO define a log_change_in_fom const
+                if log_change_in_fom < 0.03:
+                    
+                    self.gen = gen
+                    self.fom = self.fom_log[-1,1]
+                    break
+            
             if self.stop:
                 break
             
@@ -484,8 +502,7 @@ class DiffEv:
         self.running = False
         
         # Run application specific clean-up actions
-        self.fitting_ended(self)
-        
+        self.fitting_ended(self)        
             
     def calc_fom(self, vec):
         '''

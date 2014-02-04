@@ -318,7 +318,7 @@ class Model:
             exec 'def __tempfunc__(val):\n\t%s = val'%str\
                 in self.script_module.__dict__
                 
-            #print self.script_module.__tempfunc__
+            print self.script_module.__tempfunc__
             return self.script_module.__tempfunc__
     
     def get_fit_pars(self):
@@ -343,8 +343,10 @@ class Model:
             
         # Compile the strings to create the functions..
         funcs = []
+        
         for func in sfuncs:
             try:
+                self.create_fit_func(func)
                 funcs.append(self.create_fit_func(func))
             except Exception, e:
                 raise ParameterError(func, row_numbers[len(funcs)], str(e),0)
