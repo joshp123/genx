@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8c4e9ebe-fd61-45d0-bc1c-64f4f6cc305a}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>headless_looper.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <IsWindowsApplication>False</IsWindowsApplication>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="changelog.txt" />
+    <Content Include="LICENSE.txt" />
+    <Compile Include="data.py" />
+    <Compile Include="datalist.py" />
+    <Compile Include="diffev.py" />
+    <Compile Include="event_handlers.py" />
+    <Compile Include="filehandling.py" />
+    <Compile Include="fom_funcs.py" />
+    <Compile Include="genx_gui.py" />
+    <Compile Include="help.py" />
+    <Compile Include="images.py" />
+    <Compile Include="model.py" />
+    <Compile Include="my_headless_genx.py" />
+    <Compile Include="parametergrid.py" />
+    <Compile Include="parameters.py" />
+    <Compile Include="plotpanel.py" />
+    <Compile Include="solvergui.py" />
+    <Compile Include="version.py" />
+    <Compile Include="__init__.py" />
+    <Compile Include="lib\Simplex.py" />
+    <Compile Include="lib\__init__.py" />
+    <Compile Include="models\interdiff.py" />
+    <Compile Include="models\mag_refl.py" />
+    <Compile Include="models\spec_nx.py" />
+    <Compile Include="models\sxrd.py" />
+    <Compile Include="models\sxrd_mult.py" />
+    <Compile Include="models\utils.py" />
+    <Compile Include="models\xmag.py" />
+    <Compile Include="models\__init__.py" />
+    <Compile Include="plugins\add_on_framework.py" />
+    <Compile Include="plugins\data_loader_framework.py" />
+    <Compile Include="plugins\utils.py" />
+    <Compile Include="plugins\__init__.py" />
+    <Compile Include="models\lib\ables.py" />
+    <Compile Include="models\lib\edm_slicing.py" />
+    <Compile Include="models\lib\elfield.py" />
+    <Compile Include="models\lib\instrument.py" />
+    <Compile Include="models\lib\isotropic_matrix.py" />
+    <Compile Include="models\lib\math_utils.py" />
+    <Compile Include="models\lib\neutron_refl.py" />
+    <Compile Include="models\lib\offspec2_weave.py" />
+    <Compile Include="models\lib\paratt.py" />
+    <Compile Include="models\lib\paratt_weave.py" />
+    <Compile Include="models\lib\refl.py" />
+    <Compile Include="models\lib\scatteringlengths.py" />
+    <Compile Include="models\lib\xrmr.py" />
+    <Compile Include="models\lib\__init__.py" />
+    <Compile Include="plugins\add_ons\Reflectivity.py" />
+    <Compile Include="plugins\add_ons\Shell.py" />
+    <Compile Include="plugins\add_ons\Test.py" />
+    <Compile Include="plugins\add_ons\UserFuncs.py" />
+    <Compile Include="plugins\add_ons\__init__.py" />
+    <Compile Include="plugins\data_loaders\default.py" />
+    <Compile Include="plugins\data_loaders\sls_sxrd.py" />
+    <Compile Include="plugins\data_loaders\specloader.py" />
+    <Compile Include="plugins\data_loaders\stoner.py" />
+    <Compile Include="plugins\data_loaders\__init__.py" />
+    <Compile Include="plugins\add_ons\help_modules\custom_dialog.py" />
+    <Compile Include="plugins\add_ons\help_modules\reflectivity_images.py" />
+    <Compile Include="plugins\add_ons\help_modules\__init__.py" />
+    <Compile Include="plugins\data_loaders\help_modules\spec.py" />
+    <Compile Include="plugins\data_loaders\help_modules\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib" />
+    <Folder Include="models" />
+    <Folder Include="models\lib" />
+    <Folder Include="plugins" />
+    <Folder Include="plugins\add_ons" />
+    <Folder Include="plugins\add_ons\help_modules" />
+    <Folder Include="plugins\data_loaders" />
+    <Folder Include="plugins\data_loaders\help_modules" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>

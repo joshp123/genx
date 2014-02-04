@@ -1,0 +1,8 @@
+[data plot]
+zoom = True
+autoscale = True
+y scale = log
+
+[plugins]
+loaded plugins = Reflectivity
+
