@@ -45,6 +45,7 @@ class DiffEv:
     It also contains thread support which is activated by the start_fit 
     function.
     '''
+
     def __init__(self):
         
         # Mutation schemes implemented
@@ -424,7 +425,7 @@ class DiffEv:
                 log_change_in_fom = math.log(self.fom_log[-20,1]) - math.log(self.fom_log[-1,1])
                 print log_change_in_fom
                 # TODO define a log_change_in_fom const
-                if log_change_in_fom < 0.03:
+                if log_change_in_fom < 0.01:
                     
                     self.gen = gen
                     self.fom = self.fom_log[-1,1]
@@ -1118,7 +1119,8 @@ class DiffEv:
         '''set_chunksize(self, val) --> None
         '''
         self.fom_allowed_dis = float(val)
-        
+
+
     
 #==============================================================================
 # Functions that is needed for parallel processing!
