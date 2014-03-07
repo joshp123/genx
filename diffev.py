@@ -423,7 +423,7 @@ class DiffEv:
 
             if gen > 20:
                 log_change_in_fom = math.log(self.fom_log[-20,1]) - math.log(self.fom_log[-1,1])
-                print log_change_in_fom
+                #print log_change_in_fom
                 # TODO define a log_change_in_fom const
                 if log_change_in_fom < 0.01:
                     
@@ -554,6 +554,8 @@ class DiffEv:
         '''
         self.pool.close()
         self.pool.join()
+
+        print 'joining parallell stuff so hopefully the fucking clocks will work??? WHO KNOWS'
         
         #del self.pool
     
