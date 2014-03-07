@@ -12,21 +12,29 @@ class GenX:
 
         # write our values to a CSV
         # later add stopping generation
-        with open('output.csv', 'a') as file:
+        method = solver.get_create_trial()
+        with open('output_' + method + '.csv', 'a') as file:
             # add a time stamp and header line)
             line = ''
             for value in values:
                 line = line + repr(value) + ","
-                # trim trailing column
+                # toodo trim trailing column
+
+                # here you log the actual fit parameters
 
             line = line + repr(solver.fom) + ","
             # lol dont forget the separators !!!
             line = line + repr(solver.gen) + ","
             time2 = time.clock()
-            line = line + '%0.3f' % (time2-self.time1)
+            timeTaken = (time2 - self.time1)
+            #print 'Time taken: %r \t %r' % (timeTaken, (timeTaken * 5))
 
-            method = solver.get_create_trial()
+            line = line + '%0.3f' % (timeTaken * 5)
+
+  
             print method
+
+            # measure rate of convergence
 
             fomlog_path = 'fomlog_' + method + '.csv'
             if (not os.path.exists(fomlog_path)) or (os.stat(fomlog_path).st_size < 102400L):
@@ -72,7 +80,10 @@ class GenX:
     
         # do we need config? unsure. who cares.
 
-        #method = self.diffev_solver.set_create_trial()
+        mutation_schemes = ['best_1_bin', 'rand_1_bin',\
+            'best_either_or', 'rand_either_or', 'jade_best', 'simplex_best_1_bin']
+
+        method = self.diffev_solver.set_create_trial(mutation_schemes[4])
     
         #(yes we do)
     
@@ -82,16 +93,18 @@ class GenX:
             
         data = params.get_data()
     
-        # randomize params \pm 10%
+        # randomize params \pm 10% to test your fit or whatever
     
         for param in data:
             variance = (0.9 + (random.random() * 0.2))
             param[1] = param[1] * variance
+
+        # put the parameters back
     
         self.diffev_solver.model.parameters.set_data(data)
     
         self.diffev_solver.model.simulate()
-        #self.diffev_solver.model.compile_script()   # ???
+        #self.diffev_solver.model.compile_script()   # ??? #dont do this i dont think
     
         # override config here beacuse this is retarded idk
     
