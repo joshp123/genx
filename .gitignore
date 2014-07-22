@@ -1,4 +1,10 @@
-*.py[cod]
+\*.py[cod]
+
+*.gx 
+# genx data files
+
+*.dat 
+# reflectivity data files
 
 # C extensions
 *.so
@@ -15,7 +21,8 @@ var
 sdist
 develop-eggs
 .installed.cfg
-lib
+# lib
+# keep lib files
 lib64
 __pycache__
 
